@@ -82,12 +82,11 @@ long_after_sent %>% gf_density(~sentiment.value, fill=~method) %>%
 
 Now we're getting somewhere. By the looks of it, there is a measureable increase toward positive sentiment (values closer to 1) in the custom model between the two periods. Let's turn away from cool visualization to some solid statistics. 
 ```{r}
-# Run paired t-tests on both models between time periods 
-# (paired because these are two observations of the same area from two different time periods)
+# Run two sample t-tests on both models between time periods 
 t.test(alt_before_tweets$custom.prediction, alt_after_tweets$custom.prediction, 
-       paired = TRUE, alternative = 'two.sided')
+       alternative = 'two.sided')
 t.test(alt_before_tweets$textblob.prediction, alt_after_tweets$textblob.prediction, 
-       paired = TRUE, alternative = 'two.sided')
+       alternative = 'two.sided')
 ```
 
 As a final step, two boxplot graphs will be created. One will be for the custom classifier, and another for the TextBlob classifier.
@@ -113,7 +112,8 @@ before_after_blob <- data.frame(alt_before_tweets$textblob.prediction,
                                 alt_after_tweets$textblob.prediction)
 colnames(before_after_blob) <- c('before', 'after')
 long_before_after_blob <- before_after_blob %>% 
-  pivot_longer(c(before, after), names_to = 'time.period', values_to = 'textblob.sentiment')
+  pivot_longer(c(before, after), names_to = 'time.period', 
+               values_to = 'textblob.sentiment')
 
 # Re-order factors to give plot a logical flow, before --> after
 long_before_after_blob$time.period <- factor(long_before_after_blob$time.period, 
