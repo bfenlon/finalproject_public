@@ -2,4 +2,4 @@
 
 # Final Project, Data Science 710 
 
-Something to note. The 'before' and 'after' in all file names refers to the time period those files pertain to. Not before and after analysis or cleaning.
+**Something to note**. The 'before' and 'after' in all file names refers to the time period those files pertain to. Not before and after analysis or cleaning.
